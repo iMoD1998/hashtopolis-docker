@@ -1,0 +1,12 @@
+#!/usr/bin/with-contenv bash
+
+chown -R abc:abc \
+	/config \
+	/data \
+	/var/www
+	/var/lib/nginx
+
+ln -sf "/config/www/config.php" "/var/www/inc/conf.php"
+ln -sfn "/config/logs/hashtopolis/" "/var/www/log/"
+ln -sfn "/data/files" "/var/www/files"
+ln -sfn "/data/import" "/var/www/import"
