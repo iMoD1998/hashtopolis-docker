@@ -35,7 +35,7 @@ RUN echo "**** install packages ****" && \
     sed -i 's/;clear_env = no/clear_env = no/g' /etc/php7/php-fpm.d/www.conf && \
     echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php7/php-fpm.conf && \
     echo "**** set version tag ****" && \
-    if [ -z ${NEXTCLOUD_RELEASE+x} ]; then \
+    if [ -z ${HASHTOPOLIS_COMMIT_HASH+x} ]; then \
         HASHTOPOLIS_COMMIT_HASH=$(curl --no-progress-meter -X GET "https://api.github.com/repos/s3inlc/hashtopolis/git/refs/heads/master" \
         | awk '/sha/{print $4;exit}' FS='[""]' ); \
     fi && \
