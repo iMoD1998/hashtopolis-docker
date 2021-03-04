@@ -8,6 +8,7 @@ RUN echo "**** install packages ****" && \
     apk add --no-cache --upgrade \
     curl \
     libxml2 \
+    php7-curl \
     php7-gd \
     php7-mcrypt \
     php7-pdo_mysql \
