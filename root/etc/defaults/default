@@ -26,11 +26,11 @@ server {
 		log_not_found off;
 	}
 
-    location ~ /(bin|files|import|inc|lang|log|templates|tmp) {
+	location ~ /(bin|files|import|inc|lang|log|templates|tmp) {
 		deny all;
 		access_log off;
 		log_not_found off;
-    }
+	}
 
 	location ~ \.php$ {
 		fastcgi_split_path_info ^(.+\.php)(/.+)$;
