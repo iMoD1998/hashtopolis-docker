@@ -39,19 +39,23 @@ RUN echo "**** install packages ****" && \
         HASHTOPOLIS_COMMIT_HASH=$(curl --no-progress-meter -X GET "https://api.github.com/repos/s3inlc/hashtopolis/git/refs/heads/master" \
         | awk '/sha/{print $4;exit}' FS='[""]' ); \
     fi && \
+    echo "**** downloading and unpacking hashtopolis commit:${HASHTOPOLIS_COMMIT_HASH} ****" && \
+    rm -rf /var/www/* && \
     curl --no-progress-meter -o /tmp/hashtopolis.tar.gz -L \
 	"https://github.com/s3inlc/hashtopolis/archive/${HASHTOPOLIS_COMMIT_HASH}.tar.gz" && \
     mkdir -p "/tmp/hashtopolis" && \
     tar xvf "/tmp/hashtopolis.tar.gz" -C "/tmp/hashtopolis" --strip-components=1 && \
-    rm -rf /var/www/* && \
     mv "/tmp/hashtopolis/src/"* "/var/www" && \
-    chown abc:abc /var/www && \
+    echo "**** removing .gitignore and .htaccess ****" && \
+    find "/var/www/" -type f \( -name .htaccess -o -name .gitignore \) -print -exec rm {} \; && \
     echo "**** cleanup ****" && \
-    rm -rf /tmp/*
+    rm -rf /tmp/* 
 
 # copy local files
 COPY root/ /
 
 # ports and volumes
 EXPOSE 80
-VOLUME /config
+EXPOSE 443
+
+VOLUME ["/config", "/data"]
