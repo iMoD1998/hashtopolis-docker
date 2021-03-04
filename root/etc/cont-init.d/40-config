@@ -1,12 +1,24 @@
 #!/usr/bin/with-contenv bash
 
-chown -R abc:abc \
-	/config \
-	/data \
-	/var/www
-	/var/lib/nginx
+mkdir -p "/config/logs/hashtopolis/" "/data/files" "/data/import" 
 
-ln -sf "/config/www/config.php" "/var/www/inc/conf.php"
-ln -sfn "/config/logs/hashtopolis/" "/var/www/log/"
-ln -sfn "/data/files" "/var/www/files"
-ln -sfn "/data/import" "/var/www/import"
+chown -R abc:abc /config /data /var/www /var/lib/nginx
+
+symlink () {
+	mkdir -p "$1"
+	rm -rf "$2"
+	ln -s "$1" "$2"
+	echo "$2 ==> $1"
+}
+
+symlink_f()
+{
+	rm -rf "$2"
+	ln -sT "$1" "$2"
+	echo "(FILE) $2 ==> (FILE) $1"
+}
+
+symlink_f "/config/www/config.php" "/var/www/inc/conf.php"
+symlink   "/config/log/hashtopolis/" "/var/www/log"
+symlink   "/data/files" "/var/www/files"
+symlink   "/data/import" "/var/www/import"
