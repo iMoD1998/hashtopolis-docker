@@ -1,6 +1,6 @@
 #!/usr/bin/with-contenv bash
 
-mkdir -p "/config/log/hashtopolis/" "/data/files" "/data/import" 
+mkdir -p "/config/log/hashtopolis/" "/data/files" "/data/import"  "/data/bin"
 
 chown -R abc:abc /config /data /var/www /var/lib/nginx
 
