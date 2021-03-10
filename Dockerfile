@@ -37,7 +37,7 @@ RUN echo "**** install packages ****" && \
 	echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php7/php-fpm.conf && \
 	echo "**** set version tag ****" && \
 	if [ -z ${HASHTOPOLIS_COMMIT_HASH+x} ]; then \
-		HASHTOPOLIS_COMMIT_HASH=$(curl --no-progress-meter -X GET "https://api.github.com/repos/s3inlc/hashtopolis/git/refs/heads/master" \
+		HASHTOPOLIS_COMMIT_HASH=$(curl --no-progress-meter -X GET "https://api.github.com/repos/s3inlc/hashtopolis/git/refs/heads/issue/678" \
 		| awk '/sha/{print $4;exit}' FS='[""]' ); \
 	fi && \
 	echo "**** downloading and unpacking hashtopolis commit:${HASHTOPOLIS_COMMIT_HASH} ****" && \
