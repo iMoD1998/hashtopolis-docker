@@ -4,6 +4,10 @@ mkdir -p "/config/log/hashtopolis/" "/data/files" "/data/import"  "/data/bin"
 
 chown -R abc:abc /config /data /var/www /var/lib/nginx
 
+if [ -z "$(ls -A /data/bin/)" ]; then
+	cp /var/www/bin/hashtopolis.zip /data/bin
+fi
+
 symlink () {
 	mkdir -p "$1"
 	rm -rf "$2"
